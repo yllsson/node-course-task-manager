@@ -1,9 +1,13 @@
 // CRUD Create Read Update Delete
 
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 
 const connectionURL = 'mongodb://127.0.0.1:27017';
 const databaseName = 'task-manager';
+
+const id = new ObjectId();
+console.log(id.id.length);
+console.log(id.toHexString().length);
 
 MongoClient.connect(
   connectionURL,
@@ -17,8 +21,8 @@ MongoClient.connect(
 
     // db.collection('users').insertOne(
     //   {
-    //     name: 'Ylva',
-    //     age: 31
+    //     name: 'Vikram',
+    //     age: 26
     //   },
     //   (error, result) => {
     //     if (error) {
@@ -49,28 +53,28 @@ MongoClient.connect(
     //   }
     // );
 
-    db.collection('tasks').insertMany(
-      [
-        {
-          description: 'Walk the dog',
-          completed: true
-        },
-        {
-          description: 'Buy milk',
-          completed: false
-        },
-        {
-          description: 'Do my daily coding',
-          completed: true
-        }
-      ],
-      (error, result) => {
-        if (error) {
-          return console.log('Unable to insert documents');
-        }
+    // db.collection('tasks').insertMany(
+    //   [
+    //     {
+    //       description: 'Walk the dog',
+    //       completed: true
+    //     },
+    //     {
+    //       description: 'Buy milk',
+    //       completed: false
+    //     },
+    //     {
+    //       description: 'Do my daily coding',
+    //       completed: true
+    //     }
+    //   ],
+    //   (error, result) => {
+    //     if (error) {
+    //       return console.log('Unable to insert documents');
+    //     }
 
-        console.log(result.insertedIds);
-      }
-    );
+    //     console.log(result.insertedIds);
+    //   }
+    // );
   }
 );
