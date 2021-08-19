@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-db": "/Users/yllss/mongodb/bin/mongod.exe --dbpath=/Users/yllss/mongodb-data"
   },
   "keywords": [],
   "author": "",
