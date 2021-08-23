@@ -5,10 +5,6 @@ const { MongoClient, ObjectId } = require('mongodb');
 const connectionURL = 'mongodb://127.0.0.1:27017';
 const databaseName = 'task-manager';
 
-const id = new ObjectId();
-console.log(id.id.length);
-console.log(id.toHexString().length);
-
 MongoClient.connect(
   connectionURL,
   { useNewUrlParser: true },
@@ -19,62 +15,46 @@ MongoClient.connect(
 
     const db = client.db(databaseName);
 
-    // db.collection('users').insertOne(
-    //   {
-    //     name: 'Vikram',
-    //     age: 26
-    //   },
-    //   (error, result) => {
+    // db.collection('users')
+    //   .find({
+    //     age: 27
+    //   })
+    //   .toArray((error, users) => {
+    //     console.log(users);
+    //   });
+
+    // db.collection('users').findOne(
+    //   { _id: new ObjectId('6123655e3d2c4ad726330ec1') },
+    //   (error, user) => {
     //     if (error) {
-    //       return console.log('Unable to insert user');
+    //       return console.log('Unable to fetch');
     //     }
 
-    //     console.log(result.insertedId);
+    //     console.log(user);
     //   }
     // );
 
-    // db.collection('users').insertMany(
-    //   [
-    //     {
-    //       name: 'Jen',
-    //       age: 28
-    //     },
-    //     {
-    //       name: 'Gunther',
-    //       age: 27
-    //     }
-    //   ],
-    //   (error, result) => {
-    //     if (error) {
-    //       return console.log('Unable to insert documents!');
-    //     }
+    db.collection('tasks').findOne(
+      { _id: new ObjectId('6123612bdf65baceb5ffb547') },
+      (error, task) => {
+        if (!task) {
+          return console.log('No task found');
+        }
 
-    //     console.log(result.insertedIds);
-    //   }
-    // );
+        console.log(task);
+      }
+    );
 
-    // db.collection('tasks').insertMany(
-    //   [
-    //     {
-    //       description: 'Walk the dog',
-    //       completed: true
-    //     },
-    //     {
-    //       description: 'Buy milk',
-    //       completed: false
-    //     },
-    //     {
-    //       description: 'Do my daily coding',
-    //       completed: true
-    //     }
-    //   ],
-    //   (error, result) => {
-    //     if (error) {
-    //       return console.log('Unable to insert documents');
-    //     }
+    db.collection('tasks')
+      .find({
+        completed: true
+      })
+      .toArray((error, tasks) => {
+        if (error) {
+          return console.log('Unable to find the documents');
+        }
 
-    //     console.log(result.insertedIds);
-    //   }
-    // );
+        console.log(tasks);
+      });
   }
 );
